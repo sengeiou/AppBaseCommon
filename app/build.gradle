@@ -28,5 +28,22 @@ dependencies {
     testImplementation deps.junit
     androidTestImplementation deps.espresso.core
     androidTestImplementation deps.atsl.runner
-    implementation project(':BaseCommon')
+
+
+//    api deps.support.app_compat
+//    api deps.support.v4
+//    api deps.support.design
+//
+//    // Architecture components
+//    api deps.lifecycle.runtime
+//    api deps.lifecycle.extensions
+//    api deps.constraintlayout
+//    annotationProcessor deps.lifecycle.compiler
+//    api deps.room.runtime
+//    annotationProcessor deps.room.compiler
+//    api deps.paging_ktx
+
+
+    implementation project( ':BaseCommon')
+    implementation 'com.github.zhengjirui:AppBaseCommon:1.0.003'
 }
