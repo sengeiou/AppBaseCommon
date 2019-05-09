@@ -16,6 +16,11 @@ android {
 
     }
 
+    packagingOptions {
+        exclude 'META-INF/proguard/com.app.basecommon.base.IBasePresenter.pro'
+    }
+
+
     buildTypes {
         release {
             minifyEnabled false
