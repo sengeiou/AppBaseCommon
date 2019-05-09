@@ -1,0 +1,65 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+android {
+    compileSdkVersion 28
+
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+//    implementation 'com.android.support:appcompat-v7:28.0.0'
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation 'com.google.android.material:material:1.0.0-alpha1'
+    testImplementation deps.junit
+    androidTestImplementation deps.espresso.core
+    androidTestImplementation deps.atsl.runner
+
+    api deps.support.app_compat
+    api deps.support.v4
+    api deps.support.design
+
+    // Architecture components
+    api deps.lifecycle.runtime
+    api deps.lifecycle.extensions
+    api deps.constraintlayout
+    annotationProcessor deps.lifecycle.compiler
+    api deps.room.runtime
+    annotationProcessor deps.room.compiler
+    api deps.paging_ktx
+
+    api deps.RViewAdapterHelper
+    api deps.SmartRefreshLayout
+
+    //Http lib
+    api deps.retrofit.runtime
+    api deps.retrofit.gson
+    api deps.retrofit.mock
+    implementation deps.okhttp_logging_interceptor
+    api deps.retrofit2_adapter_rxjava2
+    api deps.rxjava2
+    api deps.rx_android
+}

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">AppBaseCommon</string>
+
+    <string name="title_home">接单</string>
+    <string name="title_dashboard">结算</string>
+    <string name="title_notifications">统计</string>
+    <string name="title_mine">我的</string>
+</resources>

@@ -1,0 +1,274 @@
+/**
+ * 统一处理依赖问题
+ *
+ * https://github.com/zhengjirui/lingquanbao.git
+ */
+ext.systemProperties = System.properties//添加这一行接受jenkens的传值,这里可以有两种获取值的方式，如下：
+/**
+ * 方式一：
+ * System.getProperty("BASE_URL")       --传递jenkens里面对应的值
+ * 方式二：
+ * BASE_URL                             --直接写jenkens里面对应的值
+ * 看需求选择方式
+ */
+//获取服务器连接地址
+String getBaseUrl() {
+    def BASE_URL = System.getProperty("BASE_URL")
+    if (BASE_URL == null || BASE_URL.isEmpty()) {
+        BASE_URL = "https://wap.taomimi.vip/"//检查一下是非配置出错
+    }
+    return BASE_URL
+}
+
+//获取App名称
+String getAppName() {
+    def APP_NAME = System.getProperty("APP_NAME")
+
+    if (APP_NAME == null || APP_NAME.isEmpty()) {
+        APP_NAME = "优菓测试"//默认为优菓测试
+    }
+    return APP_NAME
+}
+
+//获取App名称别名
+String getAppAliaName() {
+    def APP_ALIA_NAME = System.getProperty("APP_ALIA_NAME")
+
+    if (APP_ALIA_NAME == null || APP_ALIA_NAME.isEmpty()) {
+        APP_ALIA_NAME = "优菓测试别名"
+    }
+    return APP_ALIA_NAME
+}
+
+//获取App版本VersionCode
+int getVersionCode() {
+    def VERSION_CODE = System.getProperty("VERSION_CODE")
+    if (VERSION_CODE == null || VERSION_CODE.isEmpty()) {
+        VERSION_CODE = 21000//默认为版本1
+    }
+    return Integer.valueOf(VERSION_CODE)
+}
+
+//获取App版本VersionName
+String getVersionName() {
+    def VERSION_NAME = System.getProperty("VERSION_NAME")
+    if (VERSION_NAME == null || VERSION_NAME.isEmpty()) {
+        VERSION_NAME = "2.1.0"//默认为1.0.0
+    }
+    return VERSION_NAME
+}
+
+//获取构建的时间 
+String getBuildTime() {
+    def BUILD_TIME = System.getProperty("BUILD_TIME")
+    if (BUILD_TIME == null || BUILD_TIME.isEmpty()) {
+        BUILD_TIME = new Date().format('yyyyMMddHHmm')
+    }
+    return BUILD_TIME
+}
+
+/**-----------以上是为jenkens自动化打包的默认配置。工具打包取默认值，jenkens打包为jenkens传递值-----------*/
+
+/**
+ * Shared file between builds so that they can all use the same dependencies and
+ * maven repositories.
+ **/
+ext.deps = [:]
+def versions = [:]
+versions.android_gradle_plugin3_0_0 = '3.0.0'
+versions.android_gradle_plugin3_2_0 = '3.2.0'
+versions.virtualapk_gradle = '0.9.8.6'
+versions.virtualapk_core = '0.9.8'
+versions.apache_commons = "2.5"
+versions.arch_core = "2.0.1"
+versions.atsl_rules = "1.1.1"
+versions.atsl_runner = "1.1.1"
+versions.atsl_junit = "1.1.0"
+versions.constraint_layout = "2.0.0-alpha2"
+versions.core_ktx = "1.0.0"
+versions.dagger = "2.16"
+versions.dexmaker = "2.2.0"
+versions.espresso = "3.1.1"
+versions.fragment = "1.1.0-alpha05"
+versions.glide = "4.8.0"
+versions.hamcrest = "1.3"
+versions.junit = "4.12"
+versions.kotlin = "1.3.20"
+versions.lifecycle = "2.0.0"
+versions.mockito = "2.25.0"
+versions.mockito_all = "1.10.19"
+versions.mockito_android = "2.25.0"
+versions.mockwebserver = "3.8.1"
+versions.navigation = "2.1.0-alpha01"
+versions.okhttp_logging_interceptor = "3.9.0"
+versions.paging = "2.1.0-rc01"
+versions.retrofit = "2.3.0"
+versions.robolectric = "4.2"
+versions.RViewAdapterHelper = "2.9.40"
+versions.constraintlayout = "1.1.2"
+versions.SmartRefreshLayout = "1.1.0-alpha-24"
+versions.room = "2.1.0-alpha06"
+versions.rx_android = "2.0.1"
+versions.retrofit2_adapter_rxjava2 = "2.3.0"
+versions.rxjava2 = "2.1.3"
+versions.support = "1.0.0"
+versions.timber = "4.5.1"
+versions.work = "2.0.0-rc01"
+
+def deps = [:]
+
+def support = [:]
+support.annotations = "androidx.annotation:annotation:$versions.support"
+support.app_compat = "androidx.appcompat:appcompat:$versions.support"
+support.recyclerview = "androidx.recyclerview:recyclerview:$versions.support"
+support.cardview = "androidx.cardview:cardview:$versions.support"
+support.design = "com.google.android.material:material:$versions.support"
+support.v4 = "androidx.legacy:legacy-support-v4:$versions.support"
+support.core_utils = "androidx.legacy:legacy-support-core-utils:$versions.support"
+support.core_ktx = "androidx.core:core-ktx:$versions.core_ktx"
+support.fragment_runtime = "androidx.fragment:fragment:${versions.fragment}"
+support.fragment_runtime_ktx = "androidx.fragment:fragment-ktx:${versions.fragment}"
+support.fragment_testing = "androidx.fragment:fragment-testing:${versions.fragment}"
+deps.support = support
+
+def room = [:]
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.compiler = "androidx.room:room-compiler:$versions.room"
+room.rxjava2 = "androidx.room:room-rxjava2:$versions.room"
+room.testing = "androidx.room:room-testing:$versions.room"
+deps.room = room
+
+def lifecycle = [:]
+lifecycle.runtime = "androidx.lifecycle:lifecycle-runtime:$versions.lifecycle"
+lifecycle.extensions = "androidx.lifecycle:lifecycle-extensions:$versions.lifecycle"
+lifecycle.java8 = "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle"
+lifecycle.compiler = "androidx.lifecycle:lifecycle-compiler:$versions.lifecycle"
+lifecycle.viewmodel_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
+deps.lifecycle = lifecycle
+
+def arch_core = [:]
+arch_core.runtime = "androidx.arch.core:core-runtime:$versions.arch_core"
+arch_core.testing = "androidx.arch.core:core-testing:$versions.arch_core"
+deps.arch_core = arch_core
+
+def retrofit = [:]
+retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+retrofit.mock = "com.squareup.retrofit2:retrofit-mock:$versions.retrofit"
+deps.retrofit = retrofit
+deps.okhttp_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${versions.okhttp_logging_interceptor}"
+deps.retrofit2_adapter_rxjava2 = "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit2_adapter_rxjava2}"
+
+def dagger = [:]
+dagger.runtime = "com.google.dagger:dagger:$versions.dagger"
+dagger.android = "com.google.dagger:dagger-android:$versions.dagger"
+dagger.android_support = "com.google.dagger:dagger-android-support:$versions.dagger"
+dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger"
+dagger.android_support_compiler = "com.google.dagger:dagger-android-processor:$versions.dagger"
+
+deps.dagger = dagger
+
+def espresso = [:]
+espresso.core = "androidx.test.espresso:espresso-core:$versions.espresso"
+espresso.contrib = "androidx.test.espresso:espresso-contrib:$versions.espresso"
+espresso.intents = "androidx.test.espresso:espresso-intents:$versions.espresso"
+deps.espresso = espresso
+
+def atsl = [:]
+atsl.runner = "androidx.test:runner:$versions.atsl_runner"
+atsl.rules = "androidx.test:rules:$versions.atsl_runner"
+atsl.ext_junit = "androidx.test.ext:junit:$versions.atsl_junit"
+deps.atsl = atsl
+
+def mockito = [:]
+mockito.core = "org.mockito:mockito-core:$versions.mockito"
+mockito.all = "org.mockito:mockito-all:$versions.mockito_all"
+mockito.android = "org.mockito:mockito-android:$versions.mockito_android"
+deps.mockito = mockito
+
+def kotlin = [:]
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+kotlin.test = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
+kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+kotlin.allopen = "org.jetbrains.kotlin:kotlin-allopen:$versions.kotlin"
+
+deps.kotlin = kotlin
+
+deps.paging_ktx = "androidx.paging:paging-runtime-ktx:$versions.paging"
+
+def glide = [:]
+glide.runtime = "com.github.bumptech.glide:glide:$versions.glide"
+glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
+deps.glide = glide
+deps.dexmaker = "com.linkedin.dexmaker:dexmaker-mockito:$versions.dexmaker"
+deps.constraint_layout = "androidx.constraintlayout:constraintlayout:$versions.constraint_layout"
+deps.timber = "com.jakewharton.timber:timber:$versions.timber"
+deps.junit = "junit:junit:$versions.junit"
+deps.mock_web_server = "com.squareup.okhttp3:mockwebserver:$versions.mockwebserver"
+deps.rxjava2 = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
+deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"
+deps.hamcrest = "org.hamcrest:hamcrest-all:$versions.hamcrest"
+deps.android_gradle_plugin3_0_0 = "com.android.tools.build:gradle:$versions.android_gradle_plugin3_0_0"
+deps.android_gradle_plugin3_2_0 = "com.android.tools.build:gradle:$versions.android_gradle_plugin3_2_0"
+deps.robolectric = "org.robolectric:robolectric:$versions.robolectric"
+deps.RViewAdapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:$versions.RViewAdapterHelper"
+deps.constraintlayout = "androidx.constraintlayout:constraintlayout:$versions.constraintlayout"
+deps.SmartRefreshLayout = "com.scwang.smartrefresh:SmartRefreshLayout:$versions.SmartRefreshLayout"
+ext.deps = deps
+
+def build_versions = [:]
+build_versions.min_sdk = 21
+build_versions.target_sdk = 28
+build_versions.build_tools = "28.0.3"
+ext.build_versions = build_versions
+
+def build_fied = [:]
+build_fied.base_url_pro = "http://alksdjf"
+build_fied.base_url_dev = "http://alksdjf"
+build_fied.wxAppId = ""
+build_fied.wxAppSecret = ""
+build_fied.jiGuang_pro = ""
+build_fied.jiGuang_dev = ""
+build_fied.applicationId_pro = "com.project.app"
+build_fied.applicationId_dev = "com.project.app_dev"
+build_fied.versionCode = 1
+build_fied.versionName = "1.0.0"
+build_fied.appName = "正式环境"
+build_fied.appAliaName = "开发环境"
+build_fied.dbName = "yoogorDb"
+ext.build_fied = build_fied
+
+def work = [:]
+work.runtime = "androidx.work:work-runtime:$versions.work"
+work.testing = "androidx.work:work-testing:$versions.work"
+work.firebase = "androidx.work:work-firebase:$versions.work"
+work.runtime_ktx = "androidx.work:work-runtime-ktx:$versions.work"
+deps.work = work
+
+def navigation = [:]
+navigation.runtime = "androidx.navigation:navigation-runtime:$versions.navigation"
+navigation.runtime_ktx = "androidx.navigation:navigation-runtime-ktx:$versions.navigation"
+navigation.fragment = "androidx.navigation:navigation-fragment:$versions.navigation"
+navigation.fragment_ktx = "androidx.navigation:navigation-fragment-ktx:$versions.navigation"
+navigation.ui = "androidx.navigation:navigation-ui:$versions.navigation"
+navigation.ui_ktx = "androidx.navigation:navigation-ui-ktx:$versions.navigation"
+navigation.safe_args_plugin = "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.navigation"
+deps.navigation = navigation
+
+deps.virtualapk_gradle = "com.didi.virtualapk:gradle:$versions.virtualapk_gradle"
+deps.virtualapk_host = "com.didi.virtualapk.host"
+deps.virtualapk_core = "com.didi.virtualapk:core:$versions.virtualapk_core"
+deps.virtualapk_plugin = "com.didi.virtualapk.plugin"
+
+ext.deps = deps
+
+
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.maven { url "https://jitpack.io" }
+    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    handler.maven { url "https://kotlin.bintray.com/kotlinx/" } // For kotlinx-metadata-jvm used by Room 2.1.0 (KT-27991)
+}
+ext.addRepos = this.&addRepos
