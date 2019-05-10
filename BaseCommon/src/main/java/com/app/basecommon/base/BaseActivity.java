@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
  * @CreateTime 2019/4/23 17:06
  * @Describe
  */
-public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity{
+public abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements IMethed{
 
     //P层的应用
     protected P mPresenter;
@@ -21,7 +21,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initDataView();
-        getLifecycle().addObserver(mPresenter);
+        if (mPresenter != null){
+            getLifecycle().addObserver(mPresenter);
+        }
     }
 
     private void initDataView() {
@@ -43,24 +45,16 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
     }
 
-    protected void initIntent() {
-    }
-
-    protected abstract void initView();
-
-    protected abstract void initData();
-
-    protected abstract void initPresenter();
-
-    protected abstract void getData();
-
-    protected void toast(@StringRes int message) {
+    @Override
+    public void toast(int message) {
         Utils.toast(message);
     }
 
-    protected void toast(String message) {
+    @Override
+    public void toast(String message) {
         Utils.toast(message);
     }
+
 
     protected void startAct(Class toclass) {
         Utils.startAct(toclass);
