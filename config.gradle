@@ -270,5 +270,6 @@ def addRepos(RepositoryHandler handler) {
     handler.maven { url "https://jitpack.io" }
     handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     handler.maven { url "https://kotlin.bintray.com/kotlinx/" } // For kotlinx-metadata-jvm used by Room 2.1.0 (KT-27991)
+    handler.maven { url "https://raw.githubusercontent.com/zhengjirui/AppBaseCommon/master" }
 }
 ext.addRepos = this.&addRepos

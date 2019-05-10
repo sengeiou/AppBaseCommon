@@ -44,6 +44,7 @@ dependencies {
 //    api deps.paging_ktx
 
 
-    implementation project( ':BaseCommon')
-    implementation 'com.github.zhengjirui:AppBaseCommon:1.0.003'
+//    implementation project( ':BaseCommon')
+//    implementation 'com.github.zhengjirui:AppBaseCommon:1.0.003'
+    implementation 'com.app.basecommon:basecommons:1.0.2'
 }
