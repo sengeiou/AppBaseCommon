@@ -56,7 +56,8 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     }
 
 
-    protected void startAct(Class toclass) {
+    @Override
+    public void startAct(Class toclass) {
         Utils.startAct(toclass);
     }
 }

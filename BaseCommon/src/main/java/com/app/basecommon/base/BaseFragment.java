@@ -16,18 +16,16 @@ import androidx.fragment.app.Fragment;
  * @CreateTime 2019/5/10 13:46
  * @Describe
  */
-public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IMethed{
+public abstract class BaseFragment<P extends BasePresenter> extends Fragment implements IMethed {
     //P层的应用
     protected P mPresenter;
 
     protected View mInflate;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (getLayoutId() != 0) {
-            mInflate = inflater.inflate(getLayoutId(), container,false);
-            return mInflate;
-        } else if (getLayoutView(inflater, container, savedInstanceState) != null) {
+        if (getLayoutView(inflater, container, savedInstanceState) != null) {
             mInflate = getLayoutView(inflater, container, savedInstanceState);
             return mInflate;
         } else {
@@ -40,7 +38,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         super.onActivityCreated(savedInstanceState);
         //初始化数据和控件
         initDataView();
-        if (mPresenter != null){
+        if (mPresenter != null) {
             getLifecycle().addObserver(mPresenter);
         }
     }
@@ -49,7 +47,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (!hidden){//用户切换fragment时需要刷新数据使用
+        if (!hidden) {//用户切换fragment时需要刷新数据使用
             updataRequest();
         }
     }
@@ -73,8 +71,8 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     }
 
 
-
-    protected void updataRequest(){}
+    protected void updataRequest() {
+    }
 
     @Override
     public void toast(int message) {
@@ -85,11 +83,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     public void toast(String message) {
         Utils.toast(message);
     }
-
-
-
-
-
 
 
 }

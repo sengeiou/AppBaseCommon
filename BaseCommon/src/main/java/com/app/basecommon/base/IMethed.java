@@ -17,8 +17,13 @@ import androidx.annotation.StringRes;
  */
 public interface IMethed {
 
-    int getLayoutId();
-
+    /**
+     * 需要返回一个DataBinding.getRoot的view，或者inflater的view
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     View getLayoutView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
 
     /**
@@ -49,4 +54,6 @@ public interface IMethed {
     void toast(@StringRes int message);
 
     void toast(String message);
+
+    void startAct(Class toclass);
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BaseCommon</string>
+    <string name="navigate_unregisted">导航路径未注册！</string>
 </resources>
