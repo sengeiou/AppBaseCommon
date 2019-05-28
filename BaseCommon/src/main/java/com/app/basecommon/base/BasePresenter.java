@@ -22,16 +22,6 @@ public abstract class BasePresenter implements IBasePresenter {
     }
 
     @Override
-    public void initData() {
-
-    }
-
-    @Override
-    public void getData() {
-
-    }
-
-    @Override
     public void onStart(LifecycleOwner owner) {
 
     }

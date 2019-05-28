@@ -1,9 +1,13 @@
 package com.app.basecommon.base;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.app.basecommon.utiles.Utils;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -43,6 +47,18 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         //获取数据
         getData();
 
+    }
+
+    /**
+     * activity 子类不实现
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
+    @Override
+    public View getLayoutView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return null;
     }
 
     @Override

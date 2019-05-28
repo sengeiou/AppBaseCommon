@@ -18,7 +18,8 @@ import androidx.annotation.StringRes;
 public interface IMethed {
 
     /**
-     * 需要返回一个DataBinding.getRoot的view，或者inflater的view
+     * fragment 使用需要返回一个DataBinding.getRoot的view，或者inflater的view
+     *
      * @param inflater
      * @param container
      * @param savedInstanceState
@@ -33,6 +34,7 @@ public interface IMethed {
 
     /**
      * 初始化控件
+     * activity 和 fragment 都有使用
      */
     void initView();
 
