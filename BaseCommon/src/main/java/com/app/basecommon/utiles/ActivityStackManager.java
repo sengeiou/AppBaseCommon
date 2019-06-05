@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
+import com.app.basecommon.base.BaseApp;
+
 import java.util.Iterator;
 import java.util.Stack;
 
@@ -122,6 +124,9 @@ public class ActivityStackManager implements Application.ActivityLifecycleCallba
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         addActivity(activity);
+        //改变像素密度适配
+        Density.setDensity(BaseApp.getApplication(), activity);
+        UIUtils.getInstance(BaseApp.getApplication());
     }
 
     @Override

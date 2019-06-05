@@ -1,6 +1,5 @@
 package com.app.basecommon.utiles;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -10,13 +9,6 @@ import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 
-
-/**
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 16/12/08
- *     desc  : Utils初始化相关
- */
 public class Utils {
     private static Context context;
 

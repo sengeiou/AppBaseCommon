@@ -3,6 +3,7 @@ package com.app.basecommon.base;
 import android.app.Application;
 
 import com.app.basecommon.utiles.ActivityStackManager;
+import com.app.basecommon.utiles.UIUtils;
 import com.app.basecommon.utiles.Utils;
 
 
@@ -25,6 +26,7 @@ public class BaseApp extends Application {
         instance = this;
         ActivityStackManager.getInstance().register(this);
         Utils.init(this);
+
     }
 
     @Override
