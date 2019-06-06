@@ -24,7 +24,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 
-public abstract class BaseTabBottomActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public abstract class BaseTabBottomActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private final String TAG = "BaseTabBottomActivity";
 
@@ -33,15 +33,16 @@ public abstract class BaseTabBottomActivity extends AppCompatActivity implements
     protected ViewPager mVpContent;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bottom_tab);
-
+    public void initView() {
         mVpContent = findViewById(R.id.vp_content);
         mNavigation = findViewById(R.id.bnv_navigation);
         mNavigation.setOnNavigationItemSelectedListener(this);
 
         mNavigation.inflateMenu(getMenu());
+    }
+
+    @Override
+    public void initData() {
         mVpContent.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
             @Override
             public int getCount() {
@@ -66,6 +67,11 @@ public abstract class BaseTabBottomActivity extends AppCompatActivity implements
 
         setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
         mNavigation.getMenu().getItem(0).setChecked(true);
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_bottom_tab;
     }
 
     @Override
