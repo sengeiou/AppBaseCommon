@@ -28,6 +28,7 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -41,6 +42,7 @@ public abstract class BaseSilkRoadsTabActivity extends BaseActivity implements B
     protected ViewPager mVpContent;
     private ImageView mIvLeft;
     private ImageView mIvRight;
+    protected DrawerLayout mDrawerLayout;
 
     @Override
     public int getLayoutId() {
@@ -54,10 +56,14 @@ public abstract class BaseSilkRoadsTabActivity extends BaseActivity implements B
 
         mVpContent = findViewById(R.id.vp_content);
         mNavigation = findViewById(R.id.bnv_navigation);
+
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        mDrawerLayout.setScrimColor(getResources().getColor(R.color.c_66000000));
     }
 
     @Override
     public void initData() {
+
         mNavigation.setOnNavigationItemSelectedListener(this);
 
         mNavigation.inflateMenu(getMenu());
