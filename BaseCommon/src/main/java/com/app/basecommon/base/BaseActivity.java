@@ -24,6 +24,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getLayoutId() > 0){
+            setContentView(getLayoutId());
+        }
         initDataView();
         if (mPresenter != null){
             getLifecycle().addObserver(mPresenter);
@@ -47,6 +50,10 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
         //获取数据
         getData();
 
+    }
+
+    public int getLayoutId(){
+        return 0;
     }
 
     /**

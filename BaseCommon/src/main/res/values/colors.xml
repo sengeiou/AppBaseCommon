@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="c_d5c59f">#d5c59f</color><!--背景色-->
+    <color name="c_bd6758">#bd6758</color>
     <color name="c_66000000">#66000000</color>
 
     <!-- 00%=FF（不透明）    5%=F2    10%=E5    15%=D8    20%=CC    25%=BF    30%=B2    35%=A5    40%=99    45%=8c    50%=7F
