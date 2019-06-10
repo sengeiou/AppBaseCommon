@@ -58,4 +58,14 @@ public abstract class BaseLazyFragment<P extends BasePresenter> extends BaseFrag
         }
     }
 
+    @Override
+    public void getData() {
+        if (mPresenter != null){
+            mPresenter.getData();
+        }
+    }
+
+    public interface NotifyIsFirstVisible{
+        void isFirstVisible(boolean isFirst);
+    }
 }

@@ -39,4 +39,9 @@ public interface IBasePresenter extends LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     void onDestroy(LifecycleOwner owner);
+
+    /**
+     * 给fragment show和hide时使用
+     */
+    void updataRequest();
 }

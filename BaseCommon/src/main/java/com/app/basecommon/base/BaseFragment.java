@@ -70,8 +70,10 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         getData();
     }
 
-
     protected void updataRequest() {
+        if (mPresenter != null){
+            mPresenter.updataRequest();
+        }
     }
 
     @Override
