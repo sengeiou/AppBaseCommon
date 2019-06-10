@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
  * @Describe
  */
 
-public abstract class BaseLazyFragment extends BaseFragment {
+public abstract class BaseLazyFragment<P extends BasePresenter> extends BaseFragment<P> {
 
     private boolean mInitSuccess = false;//判断是否初始化view
     protected boolean mIsFirstVisible = true;//判断是否是第一次加载，如果加载失败，可以在实现类设置为true，当再次显示时可以重新加载
