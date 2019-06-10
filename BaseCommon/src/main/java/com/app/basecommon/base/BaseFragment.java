@@ -22,8 +22,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
 
     protected View mInflate;
 
-    protected boolean mInitSuccess = false;//判断是否初始化view
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,7 +41,6 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
         if (mPresenter != null) {
             getLifecycle().addObserver(mPresenter);
         }
-        mInitSuccess = true;
     }
 
 
@@ -74,8 +71,7 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     }
 
     protected void updataRequest() {
-        //初始化完成后
-        if (mInitSuccess && mPresenter != null){
+        if (mPresenter != null){
             mPresenter.updataRequest();
         }
     }
