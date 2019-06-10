@@ -52,6 +52,13 @@ public abstract class BaseActivity<P extends BasePresenter> extends AppCompatAct
 
     }
 
+    @Override
+    public void getData() {
+        if (mPresenter != null){
+            mPresenter.getData();
+        }
+    }
+
     public int getLayoutId(){
         return 0;
     }

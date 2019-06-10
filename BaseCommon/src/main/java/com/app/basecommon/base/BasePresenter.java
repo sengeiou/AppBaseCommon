@@ -16,9 +16,6 @@ public abstract class BasePresenter implements IBasePresenter {
     public void onCreate(LifecycleOwner owner) {
         //初始化数据
         initData();
-
-        //获取数据
-        getData();
     }
 
     @Override

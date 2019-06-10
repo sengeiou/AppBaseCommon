@@ -77,6 +77,13 @@ public abstract class BaseFragment<P extends BasePresenter> extends Fragment imp
     }
 
     @Override
+    public void getData() {
+        if (mPresenter != null){
+            mPresenter.getData();
+        }
+    }
+
+    @Override
     public void toast(int message) {
         Utils.toast(message);
     }

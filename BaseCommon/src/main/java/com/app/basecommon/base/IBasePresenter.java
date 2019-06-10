@@ -15,16 +15,6 @@ public interface IBasePresenter extends LifecycleObserver {
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     void onCreate(LifecycleOwner owner);
 
-    /**
-     * 初始化数据
-     */
-    void initData();
-
-    /**
-     * 获取数据
-     */
-    void getData();
-
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     void onStart(LifecycleOwner owner);
 
@@ -39,6 +29,16 @@ public interface IBasePresenter extends LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     void onDestroy(LifecycleOwner owner);
+
+    /**
+     * 初始化数据
+     */
+    void initData();
+
+    /**
+     * 获取数据
+     */
+    void getData();
 
     /**
      * 给fragment show和hide时使用
