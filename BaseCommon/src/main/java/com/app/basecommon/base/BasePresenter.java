@@ -46,6 +46,11 @@ public abstract class BasePresenter implements IBasePresenter {
 
     }
 
+    @Override
+    public void updataRequest() {
+
+    }
+
     protected void toast(@StringRes int message) {
         Utils.toast(message);
     }
