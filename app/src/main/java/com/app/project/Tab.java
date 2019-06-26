@@ -1,13 +1,19 @@
 package com.app.project;
 
-import android.os.Bundle;
-import android.util.Log;
+import android.content.Context;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.View;
+import android.view.WindowManager;
 
-import com.app.basecommon.base.BaseTabBottomActivity;
+import com.app.basecommon.base.BaseSilkRoadsTabActivity;
 import com.app.basecommon.utiles.Logger;
+import com.app.basecommon.utiles.StatusBarUtil;
+import com.app.basecommon.utiles.UIUtils;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 /**
@@ -15,7 +21,45 @@ import androidx.fragment.app.Fragment;
  * @CreateTime 2019/5/8 13:02
  * @Describe
  */
-public class Tab extends BaseTabBottomActivity {
+public class Tab extends BaseSilkRoadsTabActivity implements DrawerLayout.DrawerListener {
+
+    @Override
+    public void initIntent() {
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+        setItemTextAppearanceActive(R.style.tab_bottom_selecter_text);
+        setItemTextAppearanceInactive(R.style.tab_bottom_normal_text);
+        setItemTextColor(R.color.navigation_menu_item_color);
+
+        View viewById = findViewById(R.id.container);
+
+        StatusBarUtil.setTranslucentForImageView(this,0,viewById);
+        StatusBarUtil.setLightMode(this);
+
+        setIvLeftImage(R.mipmap.iv_drawlayout);
+        mDrawerLayout.addDrawerListener(this);
+        setOnIvLeftClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mDrawerLayout.isDrawerOpen(Gravity.LEFT)){
+                    mDrawerLayout.openDrawer(Gravity.LEFT);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void initPresenter() {
+
+    }
+
+    @Override
+    public void getData() {
+
+    }
 
     private enum TabFragment {
         practice(R.id.navigation_home, Test1Fragment.class),
@@ -63,15 +107,6 @@ public class Tab extends BaseTabBottomActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setItemTextAppearanceActive(R.style.tab_bottom_normal_text);
-        setItemTextAppearanceInactive(R.style.tab_bottom_selecter_text);
-        setItemTextColor(R.color.navigation_menu_item_color);
-
-    }
-
-    @Override
     protected int getMenu() {
         return R.menu.navigation;
     }
@@ -100,4 +135,25 @@ public class Tab extends BaseTabBottomActivity {
     protected void onTabDestroy() {
         TabFragment.onTabDestroy();
     }
+
+    @Override
+    public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+        drawerView.setAlpha(slideOffset);
+    }
+
+    @Override
+    public void onDrawerOpened(@NonNull View drawerView) {
+
+    }
+
+    @Override
+    public void onDrawerClosed(@NonNull View drawerView) {
+
+    }
+
+    @Override
+    public void onDrawerStateChanged(int newState) {
+
+    }
+
 }

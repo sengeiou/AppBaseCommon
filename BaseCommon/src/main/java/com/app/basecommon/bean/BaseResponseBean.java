@@ -10,9 +10,11 @@ import java.io.Serializable;
 
 public class BaseResponseBean<T> extends BaseEntityBean implements Serializable {
     public int code = 0;
+    public int category = 0;
     public String msg = "";
     public boolean success;
-    public T data;
+    public boolean hasTaste;
+    public T result;
 
     public BaseResponseBean(int itemType) {
         super(itemType);

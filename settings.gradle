@@ -1,1 +1,1 @@
-include ':app', ':BaseCommon', ':TestLib'
+include ':app', ':BaseCommon', ':TestLib', ':NavigatorCompiler', ':NavigatorApi', ':commondemo'

@@ -14,4 +14,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <Button
+        android:id="@+id/reset"
+        android:text="重置"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.app.project.wangyi.CarView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+    <com.app.project.wangyi.ClockView
+        android:id="@+id/clockview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

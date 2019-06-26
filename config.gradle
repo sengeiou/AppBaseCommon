@@ -260,9 +260,9 @@ deps.virtualapk_host = "com.didi.virtualapk.host"
 deps.virtualapk_core = "com.didi.virtualapk:core:$versions.virtualapk_core"
 deps.virtualapk_plugin = "com.didi.virtualapk.plugin"
 
+deps.commondemoIsAndroid = true
+
 ext.deps = deps
-
-
 
 def addRepos(RepositoryHandler handler) {
     handler.google()

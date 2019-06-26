@@ -20,8 +20,8 @@ public class Test3Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View inflate = inflater.inflate(R.layout.fragment_view,container, false);
-        ((TextView)inflate.findViewById(R.id.tv_text)).setText("test3");
+        View inflate = inflater.inflate(R.layout.fragment3_view,container, false);
+
         return inflate;
     }
 }

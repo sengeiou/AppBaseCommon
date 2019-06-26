@@ -28,6 +28,7 @@ dependencies {
     testImplementation deps.junit
     androidTestImplementation deps.espresso.core
     androidTestImplementation deps.atsl.runner
+//    implementation 'com.app.basecommon:basecommons:1.0.31'
     implementation project(':BaseCommon')
     //    implementation 'com.github.zhengjirui:AppBaseCommon:1.0.003'
     //    implementation 'com.app.basecommon:basecommons:1.0.30'
