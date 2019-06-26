@@ -3,7 +3,7 @@
   <groupId>com.app.basecommon</groupId>
   <artifactId>basecommons</artifactId>
   <versioning>
-    <release>1.0.3209</release>
+    <release>1.0.3210</release>
     <versions>
       <version>1.0.1</version>
       <version>1.0.2</version>
@@ -28,7 +28,8 @@
       <version>1.0.3207</version>
       <version>1.0.3208</version>
       <version>1.0.3209</version>
+      <version>1.0.3210</version>
     </versions>
-    <lastUpdated>20190626143847</lastUpdated>
+    <lastUpdated>20190626145534</lastUpdated>
   </versioning>
 </metadata>
