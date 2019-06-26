@@ -29,6 +29,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetWork {
     private static NetWork manager;
     private Retrofit retrofit;
+    private static NetWorkConfig mNetWorkConfig;
+
+    public static void config(NetWorkConfig netWorkConfig){
+        mNetWorkConfig = netWorkConfig;
+    }
 
     /**
      * 单例模式
@@ -57,7 +62,9 @@ public class NetWork {
                 .build();
 
         retrofit = new Retrofit.Builder()
-                .baseUrl(Constant.BASE_URL)
+                .baseUrl(mNetWorkConfig != null && !TextUtils.isEmpty(mNetWorkConfig.baseUrl)
+                        ? mNetWorkConfig.baseUrl
+                        : Constant.BASE_URL)
                 .client(client)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(new Converter.Factory() {
