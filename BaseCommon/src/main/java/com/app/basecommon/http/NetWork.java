@@ -30,6 +30,7 @@ public class NetWork {
     private static NetWork manager;
     private Retrofit retrofit;
     private static NetWorkConfig mNetWorkConfig;
+    private final Retrofit.Builder mBuilder;
 
     public static void config(NetWorkConfig netWorkConfig){
         mNetWorkConfig = netWorkConfig;
@@ -61,7 +62,8 @@ public class NetWork {
                 .addInterceptor(getUserAgentIntercepter())
                 .build();
 
-        retrofit = new Retrofit.Builder()
+        mBuilder = new Retrofit.Builder();
+        retrofit = mBuilder
                 .baseUrl(mNetWorkConfig != null && !TextUtils.isEmpty(mNetWorkConfig.baseUrl)
                         ? mNetWorkConfig.baseUrl
                         : Constant.BASE_URL)
@@ -115,6 +117,11 @@ public class NetWork {
     //设置tag取消请求标签
     public NetWork setTag(String tag) {
         ApiCancleManager.getInstance().setTagValue(tag);
+        return manager;
+    }
+
+    public NetWork setBaseUrl(String url){
+        mBuilder.baseUrl(url);
         return manager;
     }
 }
