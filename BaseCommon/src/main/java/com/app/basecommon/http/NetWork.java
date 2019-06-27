@@ -29,12 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetWork {
     private static NetWork manager;
     private Retrofit retrofit;
-    private static NetWorkConfig mNetWorkConfig;
-    private final Retrofit.Builder mBuilder;
-
-    public static void config(NetWorkConfig netWorkConfig){
-        mNetWorkConfig = netWorkConfig;
-    }
+    private final OkHttpClient mClient;
 
     /**
      * 单例模式
@@ -55,19 +50,16 @@ public class NetWork {
      */
     private NetWork() {
 
-        OkHttpClient client = new OkHttpClient.Builder()
+        mClient = new OkHttpClient.Builder()
                 .connectTimeout(Constant.OKHTTP_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(Constant.OKHTTP_TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(Constant.OKHTTP_TIMEOUT, TimeUnit.SECONDS)
                 .addInterceptor(getUserAgentIntercepter())
                 .build();
 
-        mBuilder = new Retrofit.Builder();
-        retrofit = mBuilder
-                .baseUrl(mNetWorkConfig != null && !TextUtils.isEmpty(mNetWorkConfig.baseUrl)
-                        ? mNetWorkConfig.baseUrl
-                        : Constant.BASE_URL)
-                .client(client)
+        retrofit = new Retrofit.Builder()
+                .baseUrl(Constant.BASE_URL)
+                .client(mClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(new Converter.Factory() {
                     @Override
@@ -96,7 +88,7 @@ public class NetWork {
             @Override
             public Response intercept(Chain chain) throws IOException {
 //                String safeToken = UserHelper.getInstence().getUserInfo().getSafeToken();
-                String safeToken = SPUtils.getInstance().getString(BaseApp.getApplication(),Constant.ACCESS_TOKEN,"");
+                String safeToken = SPUtils.getInstance().getString(BaseApp.getApplication(), Constant.ACCESS_TOKEN, "");
                 Request request = chain.request().newBuilder()
                         .addHeader("Authorization", TextUtils.isEmpty(safeToken) ? "" : "Bearer" + safeToken)
                         .addHeader("grantType", "password")
@@ -120,8 +112,26 @@ public class NetWork {
         return manager;
     }
 
-    public NetWork setBaseUrl(String url){
-        mBuilder.baseUrl(url);
+    public NetWork setBaseUrl(String baseUrl){
+        retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .client(mClient)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(new Converter.Factory() {
+                    @Override
+                    public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
+                        final Converter<ResponseBody, ?> delegate = retrofit.nextResponseBodyConverter(this, type, annotations);
+                        return new Converter<ResponseBody, Object>() {
+                            @Override
+                            public Object convert(ResponseBody body) throws IOException {
+                                if (body.contentLength() == 0) return null;
+                                return delegate.convert(body);
+                            }
+                        };
+                    }
+                })
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
         return manager;
     }
 }
