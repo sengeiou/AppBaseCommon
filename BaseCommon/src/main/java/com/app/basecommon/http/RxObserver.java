@@ -90,9 +90,9 @@ public abstract class RxObserver<T> implements Observer<BaseResponseBean<T>> {
         stopProgressDialog();
 
         if (result.success){
-            onSuccess(result.result);
+            onSuccess(result);
         }else if (result.code == 200) {
-            onSuccess(result.result);
+            onSuccess(result);
         } else if (result.code == 401 || result.code == 303) {  //错误码401 303 登录
             onFailed(result.code, result.msg);
             if (!TextUtils.isEmpty(result.msg)) {
@@ -132,7 +132,7 @@ public abstract class RxObserver<T> implements Observer<BaseResponseBean<T>> {
      *
      * @param result 服务端返回的数据
      */
-    public abstract void onSuccess(T result);
+    public abstract void onSuccess(BaseResponseBean<T> result);
 
 
 
