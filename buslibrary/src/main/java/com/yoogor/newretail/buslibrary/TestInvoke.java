@@ -6,7 +6,7 @@ package com.yoogor.newretail.buslibrary;
  * @Describe
  */
 public class TestInvoke {
-    private String name;
+    private String name = "alksdjf";
     private int num;
 
     public TestInvoke() {
