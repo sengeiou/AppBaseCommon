@@ -1,6 +1,6 @@
-package com.zhengjr.andpermissionextend;
+package com.yoogor.newretail.aopdemo.annotations;
 
-import com.yanzhenjie.permission.runtime.Permission;
+import com.yoogor.newretail.aopdemo.enums.PermissionType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -18,7 +18,5 @@ public @interface AndPermissionEx {
 
     PermissionType type() default PermissionType.RUNTIME;
 
-    String permission();
-
-    String[] permissions();
+    String[] permissions() default "";
 }

@@ -7,15 +7,21 @@
     android:orientation="vertical"
     tools:context=".LoginActivity">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="测试登录事件"
-        android:onClick="checkLogin"/>
+    <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="测试登录事件"-->
+        <!--android:onClick="checkLogin"/>-->
+
+    <!--<Button-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="测试非登录事件"-->
+        <!--android:onClick="unCheckLogin"/>-->
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="测试非登录事件"
-        android:onClick="unCheckLogin"/>
+        android:onClick="Click"
+        android:text="测试非登录事件" />
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.zhengjr.andpermissionextend;
+package com.yoogor.newretail.aopdemo.enums;
 
 /**
  * @Auther JiRui

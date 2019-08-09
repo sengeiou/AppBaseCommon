@@ -3,8 +3,14 @@ package com.yoogor.newretail.aopdemo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+
+import com.yanzhenjie.permission.runtime.Permission;
+import com.yoogor.newretail.aopdemo.annotations.AfterPermission;
+import com.yoogor.newretail.aopdemo.annotations.AndPermissionEx;
+import com.yoogor.newretail.aopdemo.annotations.BeforePermission;
+import com.yoogor.newretail.aopdemo.enums.PermissionType;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -14,19 +20,20 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
     }
 
-    @LoginCheck(value = "登录",type = 1)
-    public void checkLogin(View view){
-        Toast.makeText(this,"登录",Toast.LENGTH_SHORT).show();
-        getCache(5);
+
+    @AndPermissionEx(type = PermissionType.RUNTIME, permissions = {Permission.READ_EXTERNAL_STORAGE,Permission.CAMERA})
+    public void Click(View view) {
+        Log.e("tag", "activity-Click");
     }
 
-    @LoginCheck(value = "缓存",type = 3)
-    public void getCache(int cache){
-        Toast.makeText(this,cache + "",Toast.LENGTH_SHORT).show();
+    @BeforePermission
+    public void beforePermission() {
+        Log.e("tag", "activity-beforePermission");
     }
 
-    @LoginCheck(value = "非登录",type = 2)
-    public void unCheckLogin(View view){
-        Toast.makeText(this,"非登录",Toast.LENGTH_SHORT).show();
+    @AfterPermission
+    public void afterPermission() {
+        Log.e("tag", "activity-afterPermission");
     }
+
 }
